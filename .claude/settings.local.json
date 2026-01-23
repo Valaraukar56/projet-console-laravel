@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(C:/xampp/mysql/bin/mysql.exe -u root -e \"SHOW DATABASES LIKE ''console''; SELECT User, Host FROM mysql.user WHERE User=''console'';\")",
+      "Bash(composer install:*)",
+      "Bash(C:/xampp/php/php.exe:*)",
+      "Bash(where:*)",
+      "Bash(echo:*)"
+    ]
+  }
+}
