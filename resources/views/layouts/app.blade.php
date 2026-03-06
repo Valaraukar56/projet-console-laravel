@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +7,7 @@
 
     <title>{{ config('app.name', 'Urthel') }}</title>
 
+    <script>(function(){const t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-bs-theme',t);})();</script>
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,6 +25,11 @@
         }
         .navbar-brand {
             font-weight: bold;
+        }
+        footer {
+            background-color: var(--bs-body-bg);
+            color: var(--bs-body-color);
+            border-color: var(--bs-border-color) !important;
         }
     </style>
 </head>
@@ -57,6 +63,11 @@
                     </ul>
 
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <button id="theme-toggle" class="btn btn-link nav-link px-2" title="Changer le thème">
+                                <i class="bi bi-moon-stars" id="theme-icon"></i>
+                            </button>
+                        </li>
                         @auth
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('cart.index') }}">
@@ -116,20 +127,20 @@
             </div>
         </main>
 
-        <footer class="bg-dark text-light py-4 mt-5">
+        <footer class="border-top py-4 mt-5">
             <div class="container text-center">
                 <p class="mb-0">&copy; {{ date('Y') }} Urthel - Vente de consoles de jeux</p>
                 @auth
                     @role('admin')
                     <div class="mt-3">
                         <span class="text-muted me-2">Admin :</span>
-                        <a href="http://glpi.local" target="_blank" class="btn btn-outline-light btn-sm me-2">
+                        <a href="http://glpi.local" target="_blank" class="btn btn-outline-secondary btn-sm me-2">
                             <i class="bi bi-gear"></i> GLPI
                         </a>
-                        <a href="http://localhost/phpmyadmin" target="_blank" class="btn btn-outline-light btn-sm me-2">
+                        <a href="http://localhost/phpmyadmin" target="_blank" class="btn btn-outline-secondary btn-sm me-2">
                             <i class="bi bi-database"></i> phpMyAdmin
                         </a>
-                        <a href="{{ asset('docs/index.html') }}" target="_blank" class="btn btn-outline-light btn-sm">
+                        <a href="{{ asset('docs/index.html') }}" target="_blank" class="btn btn-outline-secondary btn-sm">
                             <i class="bi bi-file-earmark-code"></i> Documentation
                         </a>
                     </div>
@@ -140,5 +151,23 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const icon = document.getElementById('theme-icon');
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+            icon.className = theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+        }
+
+        const current = document.documentElement.getAttribute('data-bs-theme') || 'light';
+        icon.className = current === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+
+        toggle.addEventListener('click', () => {
+            const next = document.documentElement.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+        });
+    </script>
 </body>
 </html>
