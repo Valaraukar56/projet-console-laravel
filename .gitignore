@@ -22,3 +22,8 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# phpDocumentor
+phpDocumentor.phar
+/public/docs
+/.phpdoc

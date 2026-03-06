@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Console Shop') }}</title>
+    <title>{{ config('app.name', 'Urthel') }}</title>
 
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -32,7 +32,7 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <i class="bi bi-controller"></i> Console Shop
+                    <i class="bi bi-controller"></i> Urthel
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                     <span class="navbar-toggler-icon"></span>
@@ -118,7 +118,23 @@
 
         <footer class="bg-dark text-light py-4 mt-5">
             <div class="container text-center">
-                <p class="mb-0">&copy; {{ date('Y') }} Console Shop - Vente de consoles de jeux</p>
+                <p class="mb-0">&copy; {{ date('Y') }} Urthel - Vente de consoles de jeux</p>
+                @auth
+                    @role('admin')
+                    <div class="mt-3">
+                        <span class="text-muted me-2">Admin :</span>
+                        <a href="http://glpi.local" target="_blank" class="btn btn-outline-light btn-sm me-2">
+                            <i class="bi bi-gear"></i> GLPI
+                        </a>
+                        <a href="http://localhost/phpmyadmin" target="_blank" class="btn btn-outline-light btn-sm me-2">
+                            <i class="bi bi-database"></i> phpMyAdmin
+                        </a>
+                        <a href="{{ asset('docs/index.html') }}" target="_blank" class="btn btn-outline-light btn-sm">
+                            <i class="bi bi-file-earmark-code"></i> Documentation
+                        </a>
+                    </div>
+                    @endrole
+                @endauth
             </div>
         </footer>
     </div>
