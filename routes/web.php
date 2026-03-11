@@ -20,17 +20,17 @@ Route::get('/consoles/{console}', [ConsoleController::class, 'show'])->name('con
 
 // Routes admin (création, modification, suppression)
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/consoles/create', [ConsoleController::class, 'create'])->name('consoles.create');
-    Route::post('/admin/consoles', [ConsoleController::class, 'store'])->name('consoles.store');
-    Route::get('/admin/consoles/{console}/edit', [ConsoleController::class, 'edit'])->name('consoles.edit');
-    Route::put('/admin/consoles/{console}', [ConsoleController::class, 'update'])->name('consoles.update');
-    Route::delete('/admin/consoles/{console}', [ConsoleController::class, 'destroy'])->name('consoles.destroy');
+  Route::get('/admin/consoles/create', [ConsoleController::class, 'create'])->name('consoles.create');
+  Route::post('/admin/consoles', [ConsoleController::class, 'store'])->name('consoles.store');
+  Route::get('/admin/consoles/{console}/edit', [ConsoleController::class, 'edit'])->name('consoles.edit');
+  Route::put('/admin/consoles/{console}', [ConsoleController::class, 'update'])->name('consoles.update');
+  Route::delete('/admin/consoles/{console}', [ConsoleController::class, 'destroy'])->name('consoles.destroy');
 });
 
 // Routes du panier (authentifié)
 Route::middleware('auth')->group(function () {
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/{console}', [CartController::class, 'store'])->name('cart.store');
-    Route::patch('/cart/{cartItem}', [CartController::class, 'update'])->name('cart.update');
-    Route::delete('/cart/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
+  Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+  Route::post('/cart/{console}', [CartController::class, 'store'])->name('cart.store');
+  Route::patch('/cart/{cartItem}', [CartController::class, 'update'])->name('cart.update');
+  Route::delete('/cart/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
 });

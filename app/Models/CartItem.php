@@ -8,21 +8,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CartItem extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'console_id',
-        'quantity',
-    ];
+  protected $fillable = [
+    'user_id',
+    'console_id',
+    'quantity',
+  ];
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
+  public function user(): BelongsTo
+  {
+    return $this->belongsTo(User::class);
+  }
 
-    public function console(): BelongsTo
-    {
-        return $this->belongsTo(Console::class);
-    }
+  public function console(): BelongsTo
+  {
+    return $this->belongsTo(Console::class);
+  }
 }

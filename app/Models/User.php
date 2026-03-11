@@ -10,29 +10,29 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
+  use HasFactory, Notifiable, HasRoles;
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+  protected $fillable = [
+    'name',
+    'email',
+    'password',
+  ];
+
+  protected $hidden = [
+    'password',
+    'remember_token',
+  ];
+
+  protected function casts(): array
+  {
+    return [
+      'email_verified_at' => 'datetime',
+      'password' => 'hashed',
     ];
+  }
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
-
-    public function cartItems(): HasMany
-    {
-        return $this->hasMany(CartItem::class);
-    }
+  public function cartItems(): HasMany
+  {
+    return $this->hasMany(CartItem::class);
+  }
 }

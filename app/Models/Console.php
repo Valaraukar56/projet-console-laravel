@@ -8,25 +8,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Console extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'image',
-        'condition',
-        'category_id',
-        'is_available',
-    ];
+  protected $fillable = [
+    'name',
+    'description',
+    'price',
+    'image',
+    'condition',
+    'category_id',
+    'is_available',
+  ];
 
-    protected $casts = [
-        'price' => 'decimal:2',
-        'is_available' => 'boolean',
-    ];
+  protected $casts = [
+    'price' => 'decimal:2',
+    'is_available' => 'boolean',
+  ];
 
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
+  public function category(): BelongsTo
+  {
+    return $this->belongsTo(Category::class);
+  }
 }

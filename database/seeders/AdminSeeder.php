@@ -8,21 +8,21 @@ use Spatie\Permission\Models\Role;
 
 class AdminSeeder extends Seeder
 {
-    public function run(): void
-    {
-        // Créer le rôle admin s'il n'existe pas
-        $adminRole = Role::firstOrCreate(['name' => 'admin']);
+  public function run(): void
+  {
+    // Créer le rôle admin s'il n'existe pas
+    $adminRole = Role::firstOrCreate(['name' => 'admin']);
 
-        // Créer l'utilisateur admin
-        $admin = User::firstOrCreate(
-            ['email' => 'admin@admin.fr'],
-            [
-                'name' => 'Admin',
-                'password' => bcrypt('password'),
-            ]
-        );
+    // Créer l'utilisateur admin
+    $admin = User::firstOrCreate(
+      ['email' => 'admin@admin.fr'],
+      [
+        'name' => 'Admin',
+        'password' => bcrypt('password'),
+      ]
+    );
 
-        // Assigner le rôle admin
-        $admin->assignRole($adminRole);
-    }
+    // Assigner le rôle admin
+    $admin->assignRole($adminRole);
+  }
 }

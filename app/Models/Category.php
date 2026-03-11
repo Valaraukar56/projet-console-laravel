@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'slug',
-        'description',
-        'image',
-    ];
+  protected $fillable = [
+    'name',
+    'slug',
+    'description',
+    'image',
+  ];
 
-    public function consoles(): HasMany
-    {
-        return $this->hasMany(Console::class);
-    }
+  public function consoles(): HasMany
+  {
+    return $this->hasMany(Console::class);
+  }
 }
