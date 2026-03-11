@@ -35,7 +35,6 @@
                 <label class="form-label">État</label>
                 <select name="condition" class="form-select">
                     <option value="">Tous les états</option>
-                    <option value="neuf" {{ request('condition') == 'neuf' ? 'selected' : '' }}>Neuf</option>
                     <option value="très bon" {{ request('condition') == 'très bon' ? 'selected' : '' }}>Très bon</option>
                     <option value="bon" {{ request('condition') == 'bon' ? 'selected' : '' }}>Bon</option>
                     <option value="acceptable" {{ request('condition') == 'acceptable' ? 'selected' : '' }}>Acceptable</option>

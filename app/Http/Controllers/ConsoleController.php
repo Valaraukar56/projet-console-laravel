@@ -22,7 +22,7 @@ class ConsoleController extends Controller
         }
 
         $consoles = $query->latest()->get();
-        $categories = Category::all();
+        $categories = Category::where('slug', '!=', 'retro')->get();
 
         return view('consoles.index', compact('consoles', 'categories'));
     }
