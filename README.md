@@ -1,59 +1,120 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Projet Console Laravel — Guide d'installation
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Application web de vente de consoles de jeux vidéo, développée avec **Laravel 12**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Prérequis
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Avant de commencer, assurez-vous d'avoir installé :
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **PHP 8.2** ou supérieur
+- **Composer**
+- **Node.js** et **npm**
+- **XAMPP** (ou tout autre serveur Apache/MySQL local)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Installation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Cloner le dépôt
 
-## Laravel Sponsors
+```bash
+git clone https://github.com/Valaraukar56/projet-console-laravel.git
+cd projet-console-laravel
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+> Si vous utilisez XAMPP, placez le projet dans `C:\xampp\htdocs\`.
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Installer les dépendances PHP
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+### 3. Configurer l'environnement
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Copiez le fichier d'exemple `.env` :
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Puis générez la clé d'application :
 
-## License
+```bash
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> Par défaut, le projet utilise **SQLite**. Aucune configuration de base de données supplémentaire n'est nécessaire.
+
+---
+
+### 4. Créer la base de données et insérer les données
+
+```bash
+php artisan migrate --seed
+```
+
+Cette commande crée toutes les tables et insère les données de démonstration (catégories, consoles, compte administrateur).
+
+---
+
+### 5. Installer les dépendances front-end et compiler les assets
+
+```bash
+npm install
+npm run build
+```
+
+---
+
+### 6. Lancer le serveur
+
+```bash
+php artisan serve
+```
+
+L'application est accessible à l'adresse : [http://localhost:8000](http://localhost:8000)
+
+> Avec XAMPP, vous pouvez également accéder au projet via : [http://localhost/projet-console-laravel/public](http://localhost/projet-console-laravel/public)
+
+---
+
+## Compte administrateur
+
+Un compte admin est créé automatiquement lors du seeding :
+
+| Champ        | Valeur           |
+| ------------ | ---------------- |
+| Email        | `admin@admin.fr` |
+| Mot de passe | `password`       |
+
+Le compte admin permet de **créer, modifier et supprimer** des consoles depuis l'interface.
+
+---
+
+## Fonctionnalités
+
+- Parcourir le catalogue de consoles par catégorie
+- Consulter la fiche détaillée d'une console
+- Créer un compte utilisateur / se connecter
+- Ajouter des consoles au panier et gérer les quantités
+- Interface d'administration pour gérer le catalogue (réservée au rôle admin)
+
+---
+
+## Raccourci d'installation (optionnel)
+
+Un script `composer setup` est disponible pour automatiser les étapes 2, 3, 5 en une seule commande :
+
+```bash
+composer setup
+php artisan db:seed
+```
+
+> Note : le script ne lance pas les seeders automatiquement, pensez à exécuter `php artisan db:seed` après.
